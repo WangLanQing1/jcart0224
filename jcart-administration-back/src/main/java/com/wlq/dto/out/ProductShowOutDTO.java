@@ -1,5 +1,6 @@
 package com.wlq.dto.out;
 
+import lombok.Data;
 import sun.awt.image.IntegerInterleavedRaster;
 
 import java.util.List;
@@ -9,6 +10,7 @@ import java.util.List;
  * @Author WangLanQing
  * @Date 2020-02-25-18:08
  */
+@Data
 public class ProductShowOutDTO {
     private Integer productId;
     private String productCode;

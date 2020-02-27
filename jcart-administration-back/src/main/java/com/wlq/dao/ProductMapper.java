@@ -1,6 +1,11 @@
 package com.wlq.dao;
 
+import com.github.pagehelper.Page;
+import com.wlq.dto.out.ProductListOutDTO;
 import com.wlq.po.Product;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface ProductMapper {
     int deleteByPrimaryKey(Integer productId);
@@ -14,4 +19,8 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    int batchDelete(@Param("productIds") List<Integer> productIds);
+
+    Page<ProductListOutDTO> search();
 }

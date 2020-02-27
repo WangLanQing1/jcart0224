@@ -1,5 +1,6 @@
 package com.wlq.service;
 
+import com.github.pagehelper.Page;
 import com.wlq.dto.in.ProductCreateInDTO;
 import com.wlq.dto.in.ProductSearchInDTO;
 import com.wlq.dto.in.ProductUpdateInDTO;
@@ -24,7 +25,7 @@ public interface ProductService {
 
     void batchDelete(List<Integer> productIds);
 
-    PageOutDTO<ProductListOutDTO> search(Integer pageNum);
+    Page<ProductListOutDTO> search(Integer pageNum);
 
     ProductShowOutDTO getById(Integer productId);
 }

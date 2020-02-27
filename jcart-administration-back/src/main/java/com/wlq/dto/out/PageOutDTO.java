@@ -11,7 +11,7 @@ import java.util.List;
  */
 @Data
 public class PageOutDTO<T> {
-    private Integer total;
+    private Long total;
     private Integer pageSize;
     private Integer pageNum;
     private List<T> list;

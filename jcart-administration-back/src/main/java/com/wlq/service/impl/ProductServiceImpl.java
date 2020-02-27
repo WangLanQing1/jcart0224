@@ -1,6 +1,10 @@
 package com.wlq.service.impl;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wlq.dao.ProductDetailMapper;
 import com.wlq.dao.ProductMapper;
 import com.wlq.dto.in.ProductCreateInDTO;
@@ -97,15 +101,39 @@ public class ProductServiceImpl implements ProductService {
     @Override
     @Transactional
     public void batchDelete(List<Integer> productIds) {
+        productMapper.batchDelete(productIds);
+        productDetailMapper.batchDelete(productIds);
     }
 
     @Override
-    public PageOutDTO<ProductListOutDTO> search(Integer pageNum) {
-        return null;
+    public Page<ProductListOutDTO> search(Integer pageNum) {
+        PageHelper.startPage(pageNum,10);
+        Page<ProductListOutDTO> page = productMapper.search();
+        return page;
     }
 
     @Override
     public ProductShowOutDTO getById(Integer productId) {
-        return null;
+        Product product = productMapper.selectByPrimaryKey(productId);
+        ProductDetail productDetail = productDetailMapper.selectByPrimaryKey(productId);
+        //设置展示商品信息部分
+        ProductShowOutDTO productShowOutDTO = new ProductShowOutDTO();
+        productShowOutDTO.setProductId(productId);
+        productShowOutDTO.setProductCode(product.getProductCode());
+        productShowOutDTO.setProductName(product.getProductName());
+        productShowOutDTO.setPrice(product.getPrice());
+        productShowOutDTO.setDiscount(product.getDiscount());
+        productShowOutDTO.setStatus(product.getStatus());
+        productShowOutDTO.setMainPicUrl(product.getMainPicUrl());
+        productShowOutDTO.setRewordPoints(product.getRewordPoints());
+        productShowOutDTO.setSortOrder(product.getSortOrder());
+        productShowOutDTO.setStockQuantity(product.getStockQuantity());
+        //设置展示商品详情页面
+        productShowOutDTO.setDescription(productDetail.getDescription());
+        String otherPicUrlsJson = productDetail.getOtherPicUrls();
+        List<String> otherPicUrls = JSON.parseArray(otherPicUrlsJson,String.class);
+        productShowOutDTO.setOtherPicUrls(otherPicUrls);
+
+        return productShowOutDTO;
     }
 }
