@@ -1,4 +1,6 @@
 var app = new Vue({
     el: '#app',
-    data: {}
+    data: {
+        name:'张三'
+    }
 })

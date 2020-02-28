@@ -1,6 +1,7 @@
 var app =new Vue({
     el:'#app',
     data: {
+        productId: '',
         productCode:'',
         productName:'',
         price:'',
@@ -24,14 +25,20 @@ var app =new Vue({
     },
     mounted(){
         console.log('view mounted');
-        tinymce.init({
-            selector: '#mytextarea'
-        });
+
+        var url = new URL(location.href);
+        this.productId = url.searchParams.get("productId");
+        if (!this.productId){
+            alert('productId is null');
+            return;
+        }
+
+        this.getProductById();
     },
     methods: {
-        handleCreateClick(){
+        handleUpdateClick(){
             console.log('create click');
-            this.createProduct();
+            this.updateProduct();
         },
         handleOnMainChange(val){
             this.selectedMainPic = val.raw;
@@ -40,13 +47,13 @@ var app =new Vue({
             console.log('upload main pic click');
             this.uploadMainImage();
         },
-        uploadMainImage() {
+        uploadMainImage(){
             var formData = new FormData();
-            formData.append("image", this.selectedMainPic);
+            formData.append("image",this.selectedMainPic);
 
-            axios.post('/image/upload', formData, {
+            axios.post('/image/upload',formData,{
                 headers: {
-                    'Content-Type': 'multipart/form-data'
+                    'Conten-Type': 'multipart/form-data'
                 }
             })
                 .then(function (response) {
@@ -58,10 +65,6 @@ var app =new Vue({
                     console.log(error);
                     alert('上传失败');
                 })
-        },
-        handleOnOtherChange(file,fileList){
-            console.log('fileList',fileList);
-            this.selectedOtherPics = fileList;
         },
         handleOtherChange(file,fileList){
             console.log('fileList',fileList);
@@ -75,7 +78,7 @@ var app =new Vue({
             console.log('upload other pic click');
             this.uploadOtherImage();
         },
-        uploadOtherImage() {
+        uploadOtherImage(){
             this.selectedOtherPics.forEach(pic => {
                 var formData = new formData();
                 formData.append("image",pic.raw);
@@ -92,13 +95,13 @@ var app =new Vue({
                     })
                     .catch(function (error) {
                         console.log(error);
-                        alert('上失败');
+                        alert('上传失败');
                     })
             });
         },
-        createProduct(){
+        updateProduct(){
             axios.post('/product/create',{
-                productCode: this.productCode,
+                productId: this.productId,
                 productName: this.productName,
                 price: this.price,
                 discount: this.discount,
@@ -112,6 +115,33 @@ var app =new Vue({
             })
                 .then(function(response){
                     console.log(response);
+                    alert('修改成功')
+                })
+                .catch(function (error) {
+                    console.log(error);
+                })
+        },
+        getProductById(){
+            axios.get('/product/getById',{
+                params: {
+                    productId: this.productId
+                }
+            })
+                .then(function (response) {
+                    console.log(response);
+                    var product = response.data;
+                    app.productId = product.productId;
+                    app.productCode = product.productCode;
+                    app.productName = product.productName;
+                    app.price = product.price;
+                    app.discount = product.discount;
+                    app.stockQuantity = product.stockQuantity;
+                    app.selectedStatus = product.selectedStatus;
+                    app.rewordPoints = product.rewordPoints;
+                    app.sortOrder = product.sortOrder;
+                    app.mainPicUrl = product.mainPicUrl;
+                    app.description = product.description;
+                    app.otherPicUrls = product.otherPicUrls;
                 })
                 .catch(function (error) {
                     console.log(error);
