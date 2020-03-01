@@ -18,6 +18,7 @@ import java.util.List;
  * @Author WangLanQing
  * @Date 2020-02-25-18:02
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/product")
 public class ProductController {

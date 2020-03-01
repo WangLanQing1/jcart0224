@@ -16,6 +16,7 @@ import java.util.UUID;
  * @Author WangLanQing
  * @Date 2020-02-26-16:12
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/image")
 public class ImageController {
@@ -27,17 +28,18 @@ public class ImageController {
         String originalFilename = image.getOriginalFilename();
         String[] splits = originalFilename.split("\\.");
         String ext = splits[splits.length-1];
+        ext = ext.toLowerCase();
         boolean contains = imageExts.contains(ext);
         if (!contains){
             throw new ClientException(ClientExceptionConstant.IMAGE_INVALID_ERRCODE,ClientExceptionConstant.IMAGE_INVALID_ERRMSG);
         }
         String uuid = UUID.randomUUID().toString();
-        String filename = String.format("%s%s", uuid, ext);
-        String filepath = String.format("www/images/%s", filename);
+        String filename = String.format("%s.%s", uuid, ext);
+        String filepath = String.format("C:/Users/WangLanqing/Desktop/pic/%s", filename);
         try(FileOutputStream out = new FileOutputStream(filepath)) {
-            byte[] data = image.getBytes();
-            out.write(data);
-        }
+        byte[] data = image.getBytes();
+        out.write(data);
+    }
 
         return filename;
     }

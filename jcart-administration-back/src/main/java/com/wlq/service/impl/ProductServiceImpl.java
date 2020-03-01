@@ -41,6 +41,7 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     public Integer create(ProductCreateInDTO productCreateInDTO) {
         Product product = new Product();
+        System.out.println(productCreateInDTO);
         product.setProductCode(productCreateInDTO.getProductCode());
         product.setProductName(productCreateInDTO.getProductName());
         product.setPrice(productCreateInDTO.getPrice());
@@ -51,8 +52,8 @@ public class ProductServiceImpl implements ProductService {
         product.setRewordPoints(productCreateInDTO.getRewordPoints());
         product.setSortOrder(productCreateInDTO.getSortOrder());
         String description = productCreateInDTO.getDescription();
-        String productAbstract=description.substring(0, Math.min(100, description.length()));
-        product.setProductAbstract(productAbstract);
+        product.setProductAbstract(productCreateInDTO.getProductAbstract());
+        productMapper.insertSelective(product);
 
         Integer productId = product.getProductId();
         ProductDetail productDetail = new ProductDetail();

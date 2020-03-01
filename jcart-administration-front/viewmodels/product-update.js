@@ -9,6 +9,7 @@ var app =new Vue({
         stockQuantity:'',
         rewordPoints:'',
         sortOrder:'',
+        productAbstract:'',
         description:'',
         selectedStatus:1,
         selectedMainPic:'',
@@ -26,6 +27,10 @@ var app =new Vue({
     mounted(){
         console.log('view mounted');
 
+        tinymce.init({
+            selector: '#mytextarea'
+        });
+
         var url = new URL(location.href);
         this.productId = url.searchParams.get("productId");
         if (!this.productId){
@@ -37,7 +42,7 @@ var app =new Vue({
     },
     methods: {
         handleUpdateClick(){
-            console.log('create click');
+            console.log('update click');
             this.updateProduct();
         },
         handleOnMainChange(val){
@@ -66,6 +71,10 @@ var app =new Vue({
                     alert('上传失败');
                 })
         },
+        handleOnOtherChange(file,fileList){
+            console.log('fileList',fileList);
+            this.selectedOtherPics = fileList;
+        },
         handleOtherChange(file,fileList){
             console.log('fileList',fileList);
             this.selectedOtherPics = fileList;
@@ -80,7 +89,7 @@ var app =new Vue({
         },
         uploadOtherImage(){
             this.selectedOtherPics.forEach(pic => {
-                var formData = new formData();
+                var formData = new FormData();
                 formData.append("image",pic.raw);
 
                 axios.post('/image/upload',formData,{
@@ -100,7 +109,7 @@ var app =new Vue({
             });
         },
         updateProduct(){
-            axios.post('/product/create',{
+            axios.post('/product/update',{
                 productId: this.productId,
                 productName: this.productName,
                 price: this.price,
@@ -110,6 +119,7 @@ var app =new Vue({
                 mainPicUrl: this.mainPicUrl,
                 rewordPoints: this.rewordPoints,
                 sortOrder: this.sortOrder,
+                productAbstract: this.productAbstract,
                 description: this.description,
                 otherPicUrls: this.otherPicUrls
             })
@@ -140,6 +150,7 @@ var app =new Vue({
                     app.rewordPoints = product.rewordPoints;
                     app.sortOrder = product.sortOrder;
                     app.mainPicUrl = product.mainPicUrl;
+                    app.productAbstract = product.productAbstract;
                     app.description = product.description;
                     app.otherPicUrls = product.otherPicUrls;
                 })

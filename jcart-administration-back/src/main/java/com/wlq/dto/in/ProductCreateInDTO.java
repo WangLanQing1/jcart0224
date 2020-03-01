@@ -21,5 +21,6 @@ public class ProductCreateInDTO {
     private Integer rewordPoints;
     private Integer sortOrder;
     private String description;
+    private String ProductAbstract;
     private List<String> otherPicUrls;
 }
