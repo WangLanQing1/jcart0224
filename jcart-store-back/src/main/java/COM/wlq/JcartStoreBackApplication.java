@@ -1,4 +1,4 @@
-package io.cjf.jcartstoreback;
+package COM.wlq;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
