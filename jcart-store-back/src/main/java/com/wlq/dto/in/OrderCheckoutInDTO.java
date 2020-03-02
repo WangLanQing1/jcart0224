@@ -2,7 +2,6 @@ package com.wlq.dto.in;
 
 import lombok.Data;
 import lombok.ToString;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 

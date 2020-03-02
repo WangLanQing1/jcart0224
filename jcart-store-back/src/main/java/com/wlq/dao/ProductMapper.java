@@ -1,5 +1,7 @@
 package com.wlq.dao;
 
+import com.github.pagehelper.Page;
+import com.wlq.dto.out.ProductListOutDTO;
 import com.wlq.po.Product;
 
 public interface ProductMapper {
@@ -14,4 +16,6 @@ public interface ProductMapper {
     int updateByPrimaryKeySelective(Product record);
 
     int updateByPrimaryKey(Product record);
+
+    Page<ProductListOutDTO> search();
 }
