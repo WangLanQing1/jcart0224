@@ -24,6 +24,7 @@ public class CustomerServiceImpl implements CustomerService {
 
     @Override
     public Integer register(CustomerRegisterInDTO customerRegisterInDTO) {
+        System.out.println(customerRegisterInDTO);
         Customer customer = new Customer();
         customer.setUsername(customerRegisterInDTO.getUsername());
         customer.setRealName(customerRegisterInDTO.getRealName());
