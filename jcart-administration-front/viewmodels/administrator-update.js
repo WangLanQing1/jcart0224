@@ -8,7 +8,7 @@ var app = new Vue({
         email: '',
         avatarUrl: '',
         selectedStatus: '',
-        statues: [
+        statuses: [
             { value:0, label: '禁用' },
             { value:1, label: '启用' },
         ]
@@ -16,7 +16,7 @@ var app = new Vue({
     mounted() {
         console.log('view mounted');
 
-        var url = new URL(Location.href);
+        var url = new URL(location.href);
         this.administratorId = url.searchParams.get("administratorId");
         if (!this.administratorId) {
             alert('administratorId is null');
