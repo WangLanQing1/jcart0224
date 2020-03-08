@@ -3,6 +3,7 @@ package com.wlq.service;
 import com.github.pagehelper.Page;
 import com.wlq.dto.out.ProductListOutDTO;
 import com.wlq.dto.out.ProductShowOutDTO;
+import com.wlq.po.Product;
 
 /**
  * @Description
@@ -11,7 +12,9 @@ import com.wlq.dto.out.ProductShowOutDTO;
  */
 public interface ProductService {
 
-    ProductShowOutDTO getById(Integer productId);
+    Product getById(Integer productId);
+
+    ProductShowOutDTO getShowById(Integer productId);
 
     Page<ProductListOutDTO> search(Integer pageNum);
 }

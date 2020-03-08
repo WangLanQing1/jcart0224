@@ -1,5 +1,6 @@
 package com.wlq.dto.out;
 
+import com.wlq.vo.OrderProductVO;
 import lombok.Data;
 import lombok.ToString;
 
@@ -26,6 +27,6 @@ public class OrderShowOutDTO {
     private String invoiceAddress;
     private Double invoicePrice;
     private String comment;
-    private List<OrderProductOutDTO> orderProducts;
+    private List<OrderProductVO> orderProducts;
     private List<OrderHistoryListOutDTO> orderHistories;
 }

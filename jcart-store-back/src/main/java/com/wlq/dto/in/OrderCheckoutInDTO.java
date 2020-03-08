@@ -14,10 +14,10 @@ import java.util.List;
 @ToString
 public class OrderCheckoutInDTO {
     private Short shipMethod;
-    private String shipAddress;
+    private Integer shipAddressId;
     private Double shipPrice;
     private short payMethod;
-    private String invoiceAddress;
+    private Integer invoiceAddressId;
     private Double invoicePrice;
     private String comment;
     private List<OrderProductInDTO> orderProducts;
