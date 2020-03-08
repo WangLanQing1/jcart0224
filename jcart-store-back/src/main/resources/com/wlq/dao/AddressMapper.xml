@@ -30,7 +30,7 @@
       #{receiverMobile,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR}, #{tag,jdbcType=VARCHAR}
       )
   </insert>
-  <insert id="insertSelective" parameterType="com.wlq.po.Address">
+  <insert id="insertSelective" parameterType="com.wlq.po.Address" useGeneratedKeys="true" keyProperty="addressId">
     insert into jcart_address
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="addressId != null">
@@ -103,4 +103,12 @@
       tag = #{tag,jdbcType=VARCHAR}
     where address_id = #{addressId,jdbcType=INTEGER}
   </update>
+
+  <!-- custom -->
+  <select id="selectByCustomerId" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from jcart_address
+    where customer_id = #{customerId}
+  </select>
 </mapper>
