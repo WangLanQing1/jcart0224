@@ -13,7 +13,7 @@ public class CustomerListOutDTO {
     private String username;
     private String realName;
     private String mobile;
-    private String eamil;
+    private String email;
     private Byte status;
     private Long createTimestamp;
 }

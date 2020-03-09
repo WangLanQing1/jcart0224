@@ -18,6 +18,8 @@ public interface AdministratorService {
 
     Administrator getById(Integer administratorId);
 
+    Administrator getByEmail(String email);
+
     Integer create(Administrator administrator);
 
     void update(Administrator administrator);

@@ -19,4 +19,5 @@ public class CustomerShowOutDTO {
     private Long createTimestamp;
     private Boolean newsSubscribed;
     private Integer rewordPoints;
+    private String DefaultAddress;
 }
