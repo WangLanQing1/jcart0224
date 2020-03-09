@@ -1,11 +1,11 @@
 package com.wlq.controller;
 
+import com.github.pagehelper.Page;
 import com.wlq.dto.in.OrderSearchInDTO;
 import com.wlq.dto.out.*;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import com.wlq.service.OrderService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Description
@@ -14,7 +14,12 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
+
+
+    @Autowired
+    private OrderService orderService;
 
     /**
      * 查询订单列表并分页
@@ -25,7 +30,15 @@ public class OrderController {
     @GetMapping("/search")
     public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
                                               @RequestParam Integer pageNum){
-        return null;
+        Page<OrderListOutDTO> page = orderService.search(pageNum);
+
+        PageOutDTO<OrderListOutDTO> pageOutDTO = new PageOutDTO<>();
+        pageOutDTO.setTotal(page.getTotal());
+        pageOutDTO.setPageNum(page.getPageNum());
+        pageOutDTO.setPageSize(page.getPageSize());
+        pageOutDTO.setList(page);
+
+        return pageOutDTO;
     }
 
     /**
@@ -34,7 +47,10 @@ public class OrderController {
      * @return
      */
     @GetMapping("/getById")
-    public OrderShowOutDTO getById(@RequestParam Long orderId){return  null;}
+    public OrderShowOutDTO getById(@RequestParam Long orderId){
+        OrderShowOutDTO order = orderService.getById(orderId);
+        return  order;
+    }
 
     /**
      *

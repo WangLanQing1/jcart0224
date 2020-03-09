@@ -1,5 +1,6 @@
 package com.wlq.dao;
 
+import com.github.pagehelper.Page;
 import com.wlq.po.Customer;
 
 public interface CustomerMapper {
@@ -14,4 +15,7 @@ public interface CustomerMapper {
     int updateByPrimaryKeySelective(Customer record);
 
     int updateByPrimaryKey(Customer record);
+
+    //custom
+    Page<Customer> search();
 }

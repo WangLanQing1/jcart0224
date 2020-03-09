@@ -1,5 +1,8 @@
 package com.wlq.dao;
 
+import com.github.pagehelper.Page;
+import com.wlq.dto.out.OrderListOutDTO;
+import com.wlq.dto.out.PageOutDTO;
 import com.wlq.po.Order;
 
 public interface OrderMapper {
@@ -14,4 +17,8 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    //custom
+
+    Page<OrderListOutDTO> selectList();
 }
