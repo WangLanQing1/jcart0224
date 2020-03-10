@@ -1,6 +1,9 @@
 package com.wlq.dao;
 
 import com.wlq.po.OrderHistory;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 public interface OrderHistoryMapper {
     int deleteByPrimaryKey(Long orderHistoryId);
@@ -14,4 +17,8 @@ public interface OrderHistoryMapper {
     int updateByPrimaryKeySelective(OrderHistory record);
 
     int updateByPrimaryKey(OrderHistory record);
+
+    //custom
+
+    List<OrderHistory> selectByOrderId(@Param("orderId")Long orderId);
 }
