@@ -20,6 +20,7 @@ import java.util.stream.Collectors;
  */
 @RestController
 @RequestMapping("/order")
+@CrossOrigin
 public class OrderController {
 
     @Autowired

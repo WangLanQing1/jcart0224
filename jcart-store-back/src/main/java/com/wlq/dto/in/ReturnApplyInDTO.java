@@ -12,7 +12,7 @@ import lombok.ToString;
 @Data
 @ToString
 public class ReturnApplyInDTO {
-    private Integer orderId;
+    private Long orderId;
     private Long orderTimestamp;
     private String customerName;
     private String mobile;
