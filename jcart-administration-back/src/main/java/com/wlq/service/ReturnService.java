@@ -1,6 +1,7 @@
 package com.wlq.service;
 
 import com.github.pagehelper.Page;
+import com.wlq.dto.in.ReturnSearchInDTO;
 import com.wlq.po.Return;
 
 /**
@@ -10,7 +11,7 @@ import com.wlq.po.Return;
  */
 public interface ReturnService {
 
-    Page<Return> search(Integer pageNum);
+    Page<Return> search(ReturnSearchInDTO returnSearchInDTO,Integer pageNum);
 
     Return getById(Integer returnId);
 

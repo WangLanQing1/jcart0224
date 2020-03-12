@@ -4,6 +4,8 @@ import com.github.pagehelper.Page;
 import com.wlq.po.Return;
 import org.apache.ibatis.annotations.Param;
 
+import java.util.Date;
+
 public interface ReturnMapper {
     int deleteByPrimaryKey(Integer returnId);
 
@@ -19,5 +21,12 @@ public interface ReturnMapper {
 
     //custom
 
-    Page<Return> selectList();
+    Page<Return> selectList(@Param("returnId") Integer returnId,
+                            @Param("orderId") Long orderId,
+                            @Param("startTime") Date startTime,
+                            @Param("endTime") Date endTime,
+                            @Param("status") Byte status,
+                            @Param("productCode") String productCode,
+                            @Param("customerName") String customerName,
+                            @Param("productName") String productName);
 }

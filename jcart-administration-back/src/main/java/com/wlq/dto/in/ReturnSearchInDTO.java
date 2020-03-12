@@ -15,4 +15,6 @@ public class ReturnSearchInDTO {
     private String productCode;
     private String productName;
     private Byte status;
+    private Long startTimestamp;
+    private Long endTimestamp;
 }
