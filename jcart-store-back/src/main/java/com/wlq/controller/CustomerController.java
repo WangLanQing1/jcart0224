@@ -158,5 +158,7 @@ public class CustomerController {
         String bcryptHashString = BCrypt.withDefaults().hashToString(12, newPwd.toCharArray());
         customer.setEncryptedPassword(bcryptHashString);
         customerService.update(customer);
+
+        emailPwdResetCodeMap.remove(email);
     }
 }
