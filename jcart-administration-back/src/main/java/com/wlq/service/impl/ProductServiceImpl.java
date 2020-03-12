@@ -8,6 +8,7 @@ import com.github.pagehelper.PageInfo;
 import com.wlq.dao.ProductDetailMapper;
 import com.wlq.dao.ProductMapper;
 import com.wlq.dto.in.ProductCreateInDTO;
+import com.wlq.dto.in.ProductSearchInDTO;
 import com.wlq.dto.in.ProductUpdateInDTO;
 import com.wlq.dto.out.PageOutDTO;
 import com.wlq.dto.out.ProductListOutDTO;
@@ -107,9 +108,13 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Page<ProductListOutDTO> search(Integer pageNum) {
+    public Page<ProductListOutDTO> search(ProductSearchInDTO productSearchInDTO, Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<ProductListOutDTO> page = productMapper.search();
+        Page<ProductListOutDTO> page = productMapper.search(productSearchInDTO.getProductCode(),
+                productSearchInDTO.getStatus(),
+                productSearchInDTO.getStockQuantity(),
+                productSearchInDTO.getPrice(),
+                productSearchInDTO.getProductName());
         return page;
     }
 
