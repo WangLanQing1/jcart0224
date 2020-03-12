@@ -3,6 +3,11 @@ var app = new Vue({
     data: {
         pageInfo: '',
         pageNum: 1,
+        userName: '',
+        realName: '',
+        mobile: '',
+        email: '',
+        selectedStatus: '',
         statuses: [
             { value: 0, label:'禁用' },
             { value: 1, label:'启用' },
@@ -14,6 +19,19 @@ var app = new Vue({
         this.searchCustomer();
     },
     methods: {
+        handleSearchClick() {
+            console.log('search click');
+            this.pageNum = 1;
+            this.searchCustomer();
+        },
+        handleClearClick() {
+            console.log('clear click');
+            this.productCode = '';
+            this.productName = '';
+            this.price = '';
+            this.stockQuantity = '';
+            this.selectedStatus = '';
+        },
         handlePageChange(val){
             console.log('page changed');
             this.pageNum = val;
@@ -26,6 +44,11 @@ var app = new Vue({
         searchCustomer(){
             axios.get('/customer/search',{
                 param: {
+                    username: this.userName,
+                    realName: this.realName,
+                    mobile: this.mobile,
+                    email: this.email,
+                    status: this.selectedStatus,
                     pageNum: this.pageNum
                 }
             })
