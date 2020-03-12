@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
  */
 public interface OrderService {
 
-    Page<OrderListOutDTO> search(Integer pageNum);
+    Page<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,Integer pageNum);
 
     OrderShowOutDTO getById(Long orderId);
 

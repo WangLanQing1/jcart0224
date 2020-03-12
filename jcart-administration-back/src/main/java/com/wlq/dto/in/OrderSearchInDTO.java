@@ -13,4 +13,6 @@ public class OrderSearchInDTO {
     private String customerName;
     private Byte status;
     private Double totalPrice;
+    private Long startTimestamp;
+    private Long endTimestamp;
 }

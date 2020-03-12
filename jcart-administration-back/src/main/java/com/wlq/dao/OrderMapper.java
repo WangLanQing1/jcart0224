@@ -4,6 +4,9 @@ import com.github.pagehelper.Page;
 import com.wlq.dto.out.OrderListOutDTO;
 import com.wlq.dto.out.PageOutDTO;
 import com.wlq.po.Order;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.Date;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Long orderId);
@@ -20,5 +23,10 @@ public interface OrderMapper {
 
     //custom
 
-    Page<OrderListOutDTO> selectList();
+    Page<OrderListOutDTO> selectList(@Param("orderId") Long orderId,
+                                     @Param("status") Byte status,
+                                     @Param("totalPrice") Double totalPrice,
+                                     @Param("customerName") String customerName,
+                                     @Param("startTime") Date startTime,
+                                     @Param("endTime") Date endTime);
 }

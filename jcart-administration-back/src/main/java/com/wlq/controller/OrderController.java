@@ -30,7 +30,7 @@ public class OrderController {
     @GetMapping("/search")
     public PageOutDTO<OrderListOutDTO> search(OrderSearchInDTO orderSearchInDTO,
                                               @RequestParam Integer pageNum){
-        Page<OrderListOutDTO> page = orderService.search(pageNum);
+        Page<OrderListOutDTO> page = orderService.search(orderSearchInDTO,pageNum);
 
         PageOutDTO<OrderListOutDTO> pageOutDTO = new PageOutDTO<>();
         pageOutDTO.setTotal(page.getTotal());
