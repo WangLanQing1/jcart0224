@@ -3,6 +3,7 @@ package com.wlq.service.impl;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.wlq.dao.CustomerMapper;
+import com.wlq.dto.in.CustomerSearchInDTO;
 import com.wlq.dto.in.CustomerSetStatusInDTO;
 import com.wlq.po.Customer;
 import com.wlq.service.CustomerService;
@@ -21,9 +22,13 @@ public class CustomerServiceImpl implements CustomerService {
     private CustomerMapper customerMapper;
 
     @Override
-    public Page<Customer> search(Integer pageNum) {
+    public Page<Customer> search(CustomerSearchInDTO customerSearchInDTO,Integer pageNum) {
         PageHelper.startPage(pageNum,10);
-        Page<Customer> page = customerMapper.search();
+        Page<Customer> page = customerMapper.search(customerSearchInDTO.getUsername(),
+                customerSearchInDTO.getRealName(),
+                customerSearchInDTO.getMobile(),
+                customerSearchInDTO.getEmail(),
+                customerSearchInDTO.getStatus());
         return page;
     }
 

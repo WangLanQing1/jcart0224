@@ -1,6 +1,7 @@
 package com.wlq.service;
 
 import com.github.pagehelper.Page;
+import com.wlq.dto.in.CustomerSearchInDTO;
 import com.wlq.dto.in.CustomerSetStatusInDTO;
 import com.wlq.po.Customer;
 
@@ -11,7 +12,7 @@ import com.wlq.po.Customer;
  */
 public interface CustomerService {
 
-    Page<Customer> search(Integer pageNum);
+    Page<Customer> search(CustomerSearchInDTO customerSearchInDTO,Integer pageNum);
 
     Customer getById(Integer customerId);
 
