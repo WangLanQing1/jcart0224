@@ -27,10 +27,6 @@ var app =new Vue({
     mounted(){
         console.log('view mounted');
 
-        tinymce.init({
-            selector: '#mytextarea'
-        });
-
         var url = new URL(location.href);
         this.productId = url.searchParams.get("productId");
         if (!this.productId){
@@ -43,6 +39,7 @@ var app =new Vue({
     methods: {
         handleUpdateClick(){
             console.log('update click');
+            this.description = tinyMCE.activeEditor.getContent();
             this.updateProduct();
         },
         handleOnMainChange(val){
@@ -58,7 +55,7 @@ var app =new Vue({
 
             axios.post('/image/upload',formData,{
                 headers: {
-                    'Conten-Type': 'multipart/form-data'
+                    'Content-Type': 'multipart/form-data'
                 }
             })
                 .then(function (response) {
@@ -72,10 +69,6 @@ var app =new Vue({
                 })
         },
         handleOnOtherChange(file,fileList){
-            console.log('fileList',fileList);
-            this.selectedOtherPics = fileList;
-        },
-        handleOtherChange(file,fileList){
             console.log('fileList',fileList);
             this.selectedOtherPics = fileList;
         },
@@ -146,12 +139,15 @@ var app =new Vue({
                     app.price = product.price;
                     app.discount = product.discount;
                     app.stockQuantity = product.stockQuantity;
-                    app.selectedStatus = product.selectedStatus;
+                    app.selectedStatus = product.status;
                     app.rewordPoints = product.rewordPoints;
                     app.sortOrder = product.sortOrder;
                     app.mainPicUrl = product.mainPicUrl;
                     app.productAbstract = product.productAbstract;
                     app.description = product.description;
+                    tinymce.init({
+                        selector: '#mytextarea'
+                    });
                     app.otherPicUrls = product.otherPicUrls;
                 })
                 .catch(function (error) {
