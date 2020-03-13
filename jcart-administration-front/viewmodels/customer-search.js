@@ -3,7 +3,7 @@ var app = new Vue({
     data: {
         pageInfo: '',
         pageNum: 1,
-        userName: '',
+        username: '',
         realName: '',
         mobile: '',
         email: '',
@@ -26,10 +26,10 @@ var app = new Vue({
         },
         handleClearClick() {
             console.log('clear click');
-            this.productCode = '';
-            this.productName = '';
-            this.price = '';
-            this.stockQuantity = '';
+            this.username = '';
+            this.realName = '';
+            this.mobile = '';
+            this.email = '';
             this.selectedStatus = '';
         },
         handlePageChange(val){
@@ -44,7 +44,7 @@ var app = new Vue({
         searchCustomer(){
             axios.get('/customer/search',{
                 param: {
-                    username: this.userName,
+                    username: this.username,
                     realName: this.realName,
                     mobile: this.mobile,
                     email: this.email,
