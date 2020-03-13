@@ -215,7 +215,7 @@ public class AdministratorController {
         administrator.setRealName(administratorCreateInDTO.getRealName());
         administrator.setAvatarUrl(administratorCreateInDTO.getAvatarUrl());
         administrator.setEmail(administratorCreateInDTO.getEmail());
-        administrator.setStatus((byte)AdministratorStatus.Enable.ordinal());
+        administrator.setStatus(administratorCreateInDTO.getStatus());
         administrator.setCreateTime(new Date());
         //bcrypt加密密码
         String password = BCrypt.withDefaults().hashToString(12, administratorCreateInDTO.getPassword().toCharArray());
