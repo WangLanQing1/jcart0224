@@ -1,6 +1,10 @@
 const ProductUpdateRoutePage={
     template: `
     <div id="app">
+        <el-page-header @back="handleGoBack" content="商品编辑">
+        </el-page-header>
+        <br>
+    
          <el-input v-model="productCode" placeholder="请输入商品代码"></el-input>
          <el-input v-model="productName" placeholder="请输入商品名称"></el-input>
          <el-input v-model="price" placeholder="请输入价格"></el-input>
@@ -85,6 +89,10 @@ const ProductUpdateRoutePage={
         this.getProductById();
     },
     methods: {
+        handleGoBack(){
+            console.log('go back click');
+            this.$router.back();
+        },
         handleUpdateClick(){
             console.log('update click');
             this.description = tinyMCE.activeEditor.getContent();
