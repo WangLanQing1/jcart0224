@@ -15,9 +15,23 @@ const routes = [
 
 
     { path: '/order/search', component: OrderSearchRoutePage },
-    { path: '/order/show:orderId', component: OrderShowRoutePage}
+    { path: '/order/show:orderId', component: OrderShowRoutePage},
 
-    { path: '/return/search', component: ReturnSearchRoutePage }
+    { path: '/return/search', component: ReturnSearchRoutePage },
+    {
+        path: '/return/edit/:returnId',
+        component: ReturnEditRoutePage,
+        children: [
+            {
+                path: 'show',
+                component: ReturnShowRoutePage
+            },
+            {
+                path: 'history',
+                component: ReturnHistoryIndexRoutePage
+            }
+        ]
+    }
 
 ];
 
