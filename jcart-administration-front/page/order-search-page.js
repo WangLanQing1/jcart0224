@@ -116,7 +116,7 @@ Vue.component('jc-order-search-page',{
             })
                 .then(function (response) {
                     console.log(response);
-                    app.pageInfo = response.data;
+                    this.pageInfo = response.data;
                 })
                 .catch(function (error) {
                     console.log(error);

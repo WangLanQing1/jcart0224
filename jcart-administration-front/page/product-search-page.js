@@ -97,8 +97,8 @@ Vue.component('jc-product-search-page',{
                 }
             })
                 .then(function(response){
-                    console.log(response);
-                    app.pageInfo = response.data;
+                    console.log(response)
+                    this.pageInfo = response.data;
                 })
                 .catch(function(error) {
                     console.log(error);
