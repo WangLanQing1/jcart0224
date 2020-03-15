@@ -1,15 +1,11 @@
-Vue.component('jc-return-search-page',{
-    template: `
-    <div id="app">
-        <el-input v-model="returnId" placeholder="请输入退货Id"></el-input>
-        <el-input v-model="orderId" placeholder="请输入订单Id"></el-input>
+const OrderSearchRoutePage={
+    template: `<div id="app">
+        <el-input v-model="orderId" placeholder="请输入订单id"></el-input>
         <el-input v-model="customerName" placeholder="请输入客户姓名"></el-input>
-        <el-input v-model="productCode" placeholder="请输入商品代号"></el-input>
-        <el-input v-model="productName" placeholder="请输入商品名称"></el-input>
-        <br>
+        <el-input v-model="totalPrice" placeholder="请输入金额"></el-input>
 
         <el-select v-model="selectedStatus" placeholder="请选择状态">
-            <el-option v-for="item in statuses" :key="item.value" :label="item.label" :value="item.value">
+            <el-option v-for="item in statues" :key="item.value" :label="item.label" :value="item.value">
             </el-option>
         </el-select>
         <br>
@@ -24,29 +20,27 @@ Vue.component('jc-return-search-page',{
 
         <el-button type="primary" @click="handleSearchClick">搜索</el-button>
         <el-button type="primary" @click="handleClearClick">清空条件</el-button>
-
         <el-table :data="pageInfo.list" style="width: 100%">
-            <el-table-column prop="returnId" label="退货Id">
-            </el-table-column>
             <el-table-column prop="orderId" label="订单Id">
             </el-table-column>
             <el-table-column prop="customerName" label="客户姓名">
-            </el-table-column>
-            <el-table-column prop="productCode" label="商品代号">
-            </el-table-column>
-            <el-table-column prop="productName" label="商品名称">
             </el-table-column>
             <el-table-column prop="status" label="状态">
                 <template slot-scope="scope">
                     {{statuses[scope.row.status].label}}
                 </template>
             </el-table-column>
-            <el-table-column prop="createTimestamp" label="申请日期">
+            <el-table-column prop="totalPrice" label="总价">
+                <template slot-scope="scope">
+                    {{scope.row.totalPrice.toFixed(2)}}
+                </template>
+            </el-table-column>
+            <el-table-column prop="createTimestamp" label="下单时间">
                 <template slot-scope="scope">
                     {{(new Date(scope.row.createTimestamp)).toLocaleString()}}
                 </template>
             </el-table-column>
-            <el-table-column prop="updateTimestamp" label="修改日期">
+            <el-table-column prop="updateTimestamp" label="修改时间">
                 <template slot-scope="scope">
                     {{(new Date(scope.row.updateTimestamp)).toLocaleString()}}
                 </template>
@@ -61,57 +55,60 @@ Vue.component('jc-return-search-page',{
         return {
             pageInfo: '',
             pageNum: 1,
-            returnId: '',
             orderId: '',
             customerName: '',
-            productCode: '',
-            productName: '',
-            startTime: '',
-            endTime: '',
+            totalPrice: '',
             selectedStatus: '',
             statuses: [
                 { value: 0, label: '待处理' },
-                { value: 1, label: '待取货' },
-                { value: 2, label: '正在处理' },
-                { value: 3, label: '完成' },
-                { value: 4, label: '拒绝' }
-            ]
+                { value: 1, label: '处理中' },
+                { value: 2, label: '待发货' },
+                { value: 3, label: '已发货' },
+                { value: 4, label: '待签收' },
+                { value: 5, label: '已签收' },
+                { value: 6, label: '待支付' },
+                { value: 7, label: '已支付' },
+                { value: 8, label: '取消' },
+                { value: 9, label: '拒绝' },
+                { value: 10, label: '完成' },
+                { value: 11, label: '待评价' },
+                { value: 12, label: '已评价' }
+            ],
+            startTime: '',
+            endTime: ''
         }
     },
     mounted() {
         console.log('view mounted');
-        this.searchReturn();
+        this.searchOrder();
     },
     methods: {
         handleSearchClick(){
             console.log('search click');
-            this.searchReturn();
+            this.pageNum = 1;
+            this.searchOrder();
         },
         handleClearClick(){
-            console.log('clear search');
-            this.returnId = '';
+            console.log('clear click');
             this.orderId = '';
             this.customerName = '';
-            this.productCode = '';
-            this.productName = '';
+            this.selectedStatus = '';
+            this.totalPrice = '';
             this.startTime = '';
             this.endTime = '';
-            this.selectedStatus = '';
         },
-        handlePageChange(val){
+        handlePageChange(){
             console.log('page changed',val);
             this.pageNum = val;
-            this.searchReturn();
+            this.searchOrder();
         },
-        searchReturn() {
-            axios.get('/return/search',{
-                params: {
-                    returnId: this.returnId,
+        searchOrder(){
+            axios.get('/order/search',{
+                param: {
                     orderId: this.orderId,
                     customerName: this.customerName,
-                    productCode: this.productCode,
-                    productName: this.productName,
                     status: this.selectedStatus,
+                    totalPrice: this.totalPrice,
                     startTimestamp: this.startTime ? this.startTime.getTime() : '',
                     endTimestamp: this.endTime ? this.endTime.getTime() : '',
                     pageNum: this.pageNum
@@ -126,4 +123,4 @@ Vue.component('jc-return-search-page',{
                 })
         }
     }
-})
+}

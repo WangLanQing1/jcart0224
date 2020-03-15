@@ -1,4 +1,4 @@
-Vue.component('jc-product-update-page',{
+const ProductUpdateRoutePage={
     template: `
     <div id="app">
          <el-input v-model="productCode" placeholder="请输入商品代码"></el-input>
@@ -203,4 +203,4 @@ Vue.component('jc-product-update-page',{
                 })
         }
     }
-})
+}

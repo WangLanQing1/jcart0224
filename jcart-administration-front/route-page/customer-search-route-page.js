@@ -1,4 +1,4 @@
-Vue.component('jc-customer-search-page',{
+const CustomerSearchRoutePage={
     template: `
     <div id="app">
 
@@ -125,4 +125,4 @@ Vue.component('jc-customer-search-page',{
                 });
         }
     }
-})
+}
