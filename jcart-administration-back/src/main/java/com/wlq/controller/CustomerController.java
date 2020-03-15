@@ -5,7 +5,6 @@ import com.wlq.dto.in.CustomerSearchInDTO;
 import com.wlq.dto.in.CustomerSetStatusInDTO;
 import com.wlq.dto.out.CustomerListOutDTO;
 import com.wlq.dto.out.CustomerShowOutDTO;
-import com.wlq.dto.out.OrderListOutDTO;
 import com.wlq.dto.out.PageOutDTO;
 import com.wlq.po.Address;
 import com.wlq.po.Customer;

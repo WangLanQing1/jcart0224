@@ -1,8 +1,5 @@
-# Default ignored files
-/workspace.xml
-
 HELP.md
-target/
+/target/*
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**
 !**/src/test/**
@@ -32,4 +29,5 @@ build/
 
 ### VS Code ###
 .vscode/
+www/
 src/main/resources/application-exclude.properties

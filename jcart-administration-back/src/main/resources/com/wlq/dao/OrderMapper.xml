@@ -125,7 +125,7 @@
   </update>
 
   <!-- custom -->
-  <select id="selectList" resultMap="orderListOutDTO">
+  <select id="selectList" resultMap="OrderListOutDTO">
     SELECT o.*,c.real_name FROM jcart_order as o
     left join jcart_customer as c
     on o.customer_id = c.customer_id
