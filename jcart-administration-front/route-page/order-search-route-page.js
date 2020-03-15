@@ -1,5 +1,7 @@
 const OrderSearchRoutePage={
-    template: `<div id="app">
+    template: `
+    <div id="app">
+
         <el-input v-model="orderId" placeholder="请输入订单id"></el-input>
         <el-input v-model="customerName" placeholder="请输入客户姓名"></el-input>
         <el-input v-model="totalPrice" placeholder="请输入金额"></el-input>
@@ -43,6 +45,11 @@ const OrderSearchRoutePage={
             <el-table-column prop="updateTimestamp" label="修改时间">
                 <template slot-scope="scope">
                     {{(new Date(scope.row.updateTimestamp)).toLocaleString()}}
+                </template>
+            </el-table-column>
+            <el-table-column label="操作">
+                <template slot-scope="scope">
+                    <el-button size="mini" type="primary" @click="handleShowClick(scope.$index, scope.row)">详情</el-button>
                 </template>
             </el-table-column>
         </el-table>
@@ -96,6 +103,9 @@ const OrderSearchRoutePage={
             this.totalPrice = '';
             this.startTime = '';
             this.endTime = '';
+        },
+        handleShowClick(index,row){
+            this.$router.push('/order/show/'+row.orderId);
         },
         handlePageChange(){
             console.log('page changed',val);
